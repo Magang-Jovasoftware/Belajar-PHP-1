@@ -23,34 +23,17 @@
 </style>
 </head>
 <body>
-    <?php
-
-    $nilai_akhir=($_POST['tugas']*0.1)+($_POST['kuis']*0.2)+($_POST['mid']*0.3)+($_POST['uas']*0.4);
-
-    if ($nilai_akhir>=85)
-    {
-        $grade = "A";
-        $beasiswa = $nilai_akhir * 0.35 . "%";
-    } elseif ($nilai_akhir>=75)
-    {
-        $grade = "B";
-        $beasiswa = $nilai_akhir * 0.25. "%";
-    } elseif ($nilai_akhir>=55)
-    {
-        $grade = "C";
-        $beasiswa = "Tidak ada";
-    } elseif ($nilai_akhir>=40)
-    {
-        $grade = "D";
-        $beasiswa = "Tidak ada";
-    } elseif ($nilai_akhir<=75)
-    {
-        $grade = "E";
-        $beasiswa = "Tidak ada";
+<?php
+    include "Index.php";
+    if (isset($_POST['hitung'])){
+        $name = $_POST['name'];
+        $nilaiTugas = $_POST['tugas'];
+        $nilaiKuis = $_POST['kuis'];
+        $nilaiMID = $_POST['mid'];
+        $nilaiUAS = $_POST['uas'];
+        $hasil = new Siswa($name, $nilaiTugas, $nilaiKuis, $nilaiMID, $nilaiUAS);
     }
-    
-    ?>
-
+?>
     <table>
         <tr>
             <th colspan="2"> Nilai Mahasiswa</th>
@@ -77,13 +60,30 @@
         </tr>
         <tr>
             <td>Nilai Akhir</td>
-            <td><?php echo $nilai_akhir;?>  (<?php echo $grade;?>)</td>
+            <td>
+            <?php
+            echo $hasil->hitungNilaiAkhir();  
+            ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Kategori Nilai</td>
+            <td>
+            <?php
+            echo $hasil->kategoriNilai();  
+            ?>
+            </td>
         </tr>
         <tr>
             <td>Beasiswa</td>
-            <td><?php echo $beasiswa?></td>
+            <td>
+                <?php
+                echo $hasil->beasiswa();
+                ?>
+            </td>
         </tr>
     </table>
+    
 
 </body>
 </html>

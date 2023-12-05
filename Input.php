@@ -51,7 +51,7 @@
             <td></td>
             <td></td>
             <td>
-                <button type="submit">Hitung</button>
+                <button type="submit" name="hitung">Hitung</button>
             </td>
         </tr>
     </table>
